@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Επανάληψη Ιστορίας Α' Γυμνασίου</title>
+    <style>
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: black;
+            color: gold;
+            padding: 20px;
+            font-size: 36px;
+            text-transform: uppercase;
+        }
+        .creator {
+            background-color: black;
+            color: gold;
+            padding: 10px;
+            font-size: 18px;
+        }
+        .question-container {
+            margin: 30px;
+        }
+        .question {
+            margin: 15px 0;
+            padding: 10px;
+            font-size: 18px;
+            background-color: #444;
+            border-radius: 10px;
+        }
+        .true, .false {
+            font-size: 20px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #777; /* Γκρι χρώμα και για τα δύο κουμπιά */
+            color: white;
+            border: none;
+        }
+        .true:hover, .false:hover {
+            background-color: #999; /* Λίγο πιο ανοιχτό γκρι όταν το ποντίκι περνάει από πάνω */
+        }
+        .score-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+        .emojis {
+            font-size: 30px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
 
+<!-- Creator Information -->
+<div class="creator">
+    Δημιουργία/Επιμέλεια: Παναγιώτης Δόμβρος (CC BY-NC)
+</div>
+
+<!-- Title -->
+<h1>Επανάληψη της Ιστορίας Α' Γυμνασίου</h1>
+
+<div class="emojis">
+    😀 😁 😎 🤔 🙌 🎉 ✨ 💡 🔥 🌟
+</div>
+
+<div class="score-box">
+    Σκορ: <span id="score">0</span> / 50
+</div>
+
+<div class="question-container">
+    <!-- All 50 questions will be displayed one by one -->
+</div>
+
+<script>
+    let score = 0;
+    const questions = [
+        // Κυκλαδικός και Μινωικός πολιτισμός
+        { question: 'Ο Κυκλαδικός πολιτισμός ανέπτυξε κεντρική εξουσία.', answer: false },
+        { question: 'Τα νησιά των Κυκλάδων ήταν σημαντικά εμπορικά κέντρα μεταξύ της Ευρώπης και της Ασίας.', answer: true },
+        { question: 'Οι Μυκηναίοι κυριάρχησαν στις Κυκλάδες μετά την κατάρρευση των Μινωιτών.', answer: true },
+        { question: 'Οι Μινωίτες ήταν γεωργικός λαός.', answer: false },
+        { question: 'Ο πολιτισμός των Μινωιτών έφτασε στην ακμή του γύρω στο 1450 π.Χ.', answer: true },
+        { question: 'Οι Μινωίτες είχαν περιορισμένες επαφές με την Αίγυπτο και την Ανατολή.', answer: false },
+        { question: 'Οι Μυκηναίοι επηρεάστηκαν σημαντικά από τον Μινωικό πολιτισμό.', answer: true },
+        { question: 'Η καταστροφή των μινωικών ανακτόρων γύρω στο 1700 π.Χ. δεν είχε σημαντική επίδραση στους Μινωίτες.', answer: false },
+        { question: 'Η Κρήτη ήταν ένας κλειστός πολιτισμός χωρίς επαφές με άλλες περιοχές.', answer: false },
+        
+        // Αρχαϊκή εποχή - αποικίες
+        { question: 'Η ανάπτυξη της ελληνικής αποικιοκρατίας στον 8ο αιώνα π.Χ. επηρεάστηκε κυρίως από οικονομικούς λόγους.', answer: true },
+        { question: 'Οι Έλληνες της αρχαϊκής εποχής εγκαθιστούσαν αποικίες χωρίς στρατηγική σχεδίαση.', answer: false },
+        { question: 'Οι αποικίες της Μεγάλης Ελλάδας υπήρξαν αποτέλεσμα πολιτικών και εμπορικών συμφερόντων.', answer: true },
+        
+        // Πόλη-κράτος
+        { question: 'Η πόλη-κράτος της αρχαϊκής εποχής ήταν το αποτέλεσμα της διάσπασης των φυλετικών κρατών.', answer: true },
+        { question: 'Η ανάπτυξη της πόλης-κράτους συνδέθηκε με την ανάγκη για στρατιωτική προστασία.', answer: true },
+        { question: 'Η συμμετοχή στην πολιτική εξουσία περιοριζόταν στους ευγενείς της Αθήνας.', answer: false },
+        { question: 'Η σύγκρουση Αθήνας-Σπάρτης δεν είχε σημαντική επίδραση στον Αρχαϊκό κόσμο.', answer: false },
+        
+        // Συμμαχία της Δήλου και Αθηναϊκή ηγεμονία
+        { question: 'Οι Αθηναίοι ήταν κυρίαρχοι της Συμμαχίας της Δήλου μετά την νίκη τους κατά των Περσών.', answer: true },
+        { question: 'Η Αθήνα μετέφερε το ταμείο της Συμμαχίας από τη Δήλο στην Ακρόπολη το 454 π.Χ.', answer: true },
+        { question: 'Οι αποφάσεις της Συμμαχίας της Δήλου λαμβάνονταν συλλογικά από όλα τα μέλη.', answer: false },
+        { question: 'Οι σύμμαχοι της Συμμαχίας της Δήλου δεν μπορούσαν να αποχωρήσουν χωρίς την άδεια της Αθήνας.', answer: true },
+        { question: 'Οι Έλληνες της Συμμαχίας της Δήλου συνέχισαν να απολαμβάνουν πλήρη αυτονομία.', answer: false },
+        { question: 'Ο Κίμων συνέχισε τον πόλεμο κατά των Περσών με στόχο την ενίσχυση της αθηναϊκής ηγεμονίας.', answer: true },
+        
+        // Αθηναϊκή δημοκρατία
+        { question: 'Η Αθηναϊκή δημοκρατία είχε πλήρη συμμετοχή των πολιτών στις αποφάσεις.', answer: true },
+        { question: 'Οι Αθηναίοι δεν έδιναν σημασία στην τέχνη και την επιστήμη κατά την Κλασική εποχή.', answer: false },
+        { question: 'Η φιλοσοφία της Αθηναϊκής δημοκρατίας βασίστηκε στην ιδέα της κοινωνικής ισότητας.', answer: true },
+        { question: 'Ο Σωκράτης έγραψε πολλά έργα για τις διδασκαλίες του.', answer: false },
+        { question: 'Ο Πλάτωνας υποστήριζε την ύπαρξη μιας ιδανικής σφαίρας ζωής με ηθικές αξίες.', answer: true },
+        { question: 'Η Αθηναϊκή κοινωνία βασιζόταν εξ ολοκλήρου στην αγροτική παραγωγή.', answer: false },
+        { question: 'Οι μεγάλες τραγωδίες και κωμωδίες του Σοφοκλή και του Αισχύλου έδιναν πολιτικά μηνύματα στους πολίτες.', answer: true },
+        
+        // Σπάρτη
+        { question: 'Οι Σπαρτιάτες θεωρούσαν την ελευθερία και την ισότητα ως βασικές αξίες της κοινωνίας τους.', answer: false },
+        { question: 'Η Σπάρτη είχε πολιτική ισότητα μεταξύ των πολιτών.', answer: false },
+        { question: 'Η Αθήνα είχε το πιο ισχυρό ναυτικό στην Αρχαϊκή εποχή.', answer: true },
+        { question: 'Οι Αθηναίοι προχώρησαν σε αποικιστικές δραστηριότητες για να επεκτείνουν τις εμπορικές τους σχέσεις.', answer: true },
+        { question: 'Η νίκη του Κίμωνα στην Παμφυλία βοήθησε στην ενίσχυση της Συμμαχίας της Δήλου.', answer: true },
+        { question: 'Η συμμετοχή στην Αθηναϊκή φάλαγγα ήταν περιορισμένη στους πλούσιους πολίτες.', answer: false },
+        
+        // Μακεδονία και Αλέξανδρος
+        { question: 'Η Μακεδονία ήταν πολιτικά απομονωμένη μέχρι την εποχή του Φιλίππου Β΄.', answer: true },
+        { question: 'Ο Αλέξανδρος ο Μέγας κατάφερε να καταστρέψει την περσική αυτοκρατορία.', answer: true },
+        { question: 'Ο Αλέξανδρος ο Μέγας πέθανε στην Αίγυπτο το 323 π.Χ.', answer: false },
+        { question: 'Η Αλεξάνδρεια αναπτύχθηκε ως κέντρο πολιτισμού και επιστήμης κατά την ελληνιστική εποχή.', answer: true },
+        { question: 'Η επικράτηση της ελληνικής γλώσσας στην Αίγυπτο και τη Συρία ήταν το αποτέλεσμα του εκπολιτιστικού έργου του Αλέξανδρου.', answer: true },
+        { question: 'Η ελληνιστική εποχή χαρακτηρίζεται από τη διάδοση της ελληνικής τέχνης και επιστήμης.', answer: true },
+        { question: 'Οι Πτολεμαίοι στην Αίγυπτο διατήρησαν τις παραδόσεις της φαραωικής διακυβέρνησης.', answer: true },
+        { question: 'Η Αντιόχεια ήταν το πολιτικό κέντρο της Συρίας και διέθετε γεωργική υπεροχή.', answer: true },
+        { question: 'Η διαίρεση της αυτοκρατορίας του Αλέξανδρου ήταν αποτέλεσμα διαφωνιών μεταξύ των διαδόχων.', answer: true },
+        { question: 'Ο Σέλευκος ήταν ο ιδρυτής του κράτους της Συρίας και μετέφερε την πρωτεύουσα από τη Βαβυλώνα στην Αντιόχεια.', answer: true },
+        { question: 'Ο Αλέξανδρος δημιουργησε τη Βιβλιοθήκη της Αλεξάνδρειας.', answer: false },
+        { question: 'Το γυμνάσιο ήταν ο τόπος εκπαίδευσης και πνευματικής ανάπτυξης στην ελληνιστική εποχή.', answer: true },
+        { question: 'Οι Πτολεμαίοι εξασφάλισαν την κυριαρχία τους στην Αίγυπτο με την υποστήριξη του ελληνικού πολιτισμού.', answer: true },
+        { question: 'Η ελληνιστική εποχή επηρεάστηκε από την εξάπλωση του ελληνικού πολιτισμού σε όλη τη Μεσόγειο.', answer: true },
+        { question: 'Οι Ρωμαίοι υιοθέτησαν πολλές από τις ελληνικές πολιτιστικές πρακτικές κατά τη διάρκεια της ελληνιστικής περιόδου.', answer: true },
+    ];
+
+    let currentQuestion = 0;
+
+    function checkAnswer(questionNumber, isCorrect) {
+        const correctAnswer = questions[questionNumber - 1].answer;
+        const questionDiv = document.getElementById('question' + questionNumber);
+        
+        if (isCorrect === correctAnswer) {
+            questionDiv.style.backgroundColor = 'green';
+            score++;
+        } else {
+            questionDiv.style.backgroundColor = 'red';
+        }
+
+        document.getElementById('score').textContent = score;
+        currentQuestion++;
+        
+        if (currentQuestion < questions.length) {
+            setTimeout(() => {
+                questionDiv.classList.add('hidden');
+                const nextQuestion = document.createElement('div');
+                nextQuestion.classList.add('question');
+                nextQuestion.id = 'question' + (currentQuestion + 1);
+                nextQuestion.innerHTML = `
+                    Ερώτηση ${currentQuestion + 1}: ${questions[currentQuestion].question}
+                    <br><br>
+                    <button class="true" onclick="checkAnswer(${currentQuestion + 1}, true)">Σωστό</button>
+                    <button class="false" onclick="checkAnswer(${currentQuestion + 1}, false)">Λάθος</button>
+                `;
+                document.querySelector('.question-container').appendChild(nextQuestion);
+            }, 1000);
+        }
+    }
+
+    // Initially load the first question
+    window.onload = function() {
+        const firstQuestion = document.createElement('div');
+        firstQuestion.classList.add('question');
+        firstQuestion.id = 'question1';
+        firstQuestion.innerHTML = `
+            Ερώτηση 1: ${questions[0].question}
+            <br><br>
+            <button class="true" onclick="checkAnswer(1, true)">Σωστό</button>
+            <button class="false" onclick="checkAnswer(1, false)">Λάθος</button>
+        `;
+        document.querySelector('.question-container').appendChild(firstQuestion);
+    };
+</script>
+
+</body>
+</html>

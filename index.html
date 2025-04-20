@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>επανάληψη της ιστορίας α' γυμνασίου</title>
+    <title>Επανάληψη της Ιστορίας Α' Γυμνασίου</title>
     <style>
         body {
             font-family: 'Comfortaa', sans-serif;
@@ -20,7 +20,7 @@
             font-size: 36px;
             text-transform: none;
         }
-        .creator {
+        .creator, .director {
             background-color: black;
             color: gold;
             padding: 10px;
@@ -84,6 +84,9 @@
 <div class="creator">
     Δημιουργία/Επιμέλεια: Παναγιώτης Δόμβρος (CC BY-NC)
 </div>
+<div class="director">
+    Διευθυντής 1ου Γυμνασίου Πυλαίας
+</div>
 
 <h1>Επανάληψη της Ιστορίας Α' Γυμνασίου</h1>
 
@@ -128,7 +131,6 @@
 
             const qDiv = document.createElement('div');
             qDiv.classList.add('question');
-            // Τυλίγουμε «Ερώτηση X:» σε span με υπογράμμιση
             qDiv.innerHTML = `<span class="question-number">Ερώτηση ${index + 1}:</span> ${q.question}`;
 
             const btnTrue = document.createElement('button');

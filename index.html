@@ -43,15 +43,18 @@
         .question {
             margin: 15px 0;
             padding: 15px;
-            font-size: 21.6px; /* +20% */
-            background-color: #0b3d91; /* πιο σκούρο μπλε */
+            font-size: 120%;               /* αύξηση 20% σε σχέση με το parent */
+            background-color: #0b3d91;     /* πιο σκούρο μπλε */
             color: gold;
             border-radius: 10px;
             position: relative;
-            font-weight: bold; /* πιο έντονα γράμματα */
+            font-weight: bold;             /* πιο έντονα γράμματα */
             text-shadow:
                 1px 1px 0px rgba(0, 0, 0, 0.8),
                -1px -1px 0px rgba(255, 255, 255, 0.2);
+        }
+        .question-number {
+            text-decoration: underline;    /* υπογράμμιση για «Ερώτηση X» */
         }
         .emoji {
             display: block;
@@ -122,13 +125,17 @@
             const emojiDiv = document.createElement('div');
             emojiDiv.classList.add('emoji');
             emojiDiv.textContent = ancientEmojis[index % ancientEmojis.length];
+
             const qDiv = document.createElement('div');
             qDiv.classList.add('question');
-            qDiv.innerHTML = `Ερώτηση ${index + 1}: ${q.question}`;
+            // Τυλίγουμε «Ερώτηση X:» σε span με υπογράμμιση
+            qDiv.innerHTML = `<span class="question-number">Ερώτηση ${index + 1}:</span> ${q.question}`;
+
             const btnTrue = document.createElement('button');
             btnTrue.classList.add('true');
             btnTrue.textContent = 'Σωστό';
             btnTrue.onclick = () => checkAnswer(true);
+
             const btnFalse = document.createElement('button');
             btnFalse.classList.add('false');
             btnFalse.textContent = 'Λάθος';

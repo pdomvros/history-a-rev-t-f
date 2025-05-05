@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Επανάληψη της Ιστορίας Α' Γυμνασίου</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Comfortaa', sans-serif;
@@ -43,18 +44,18 @@
         .question {
             margin: 15px 0;
             padding: 15px;
-            font-size: 120%;               /* αύξηση 20% σε σχέση με το parent */
-            background-color: #0b3d91;     /* πιο σκούρο μπλε */
+            font-size: 120%;
+            background-color: #0b3d91;
             color: gold;
             border-radius: 10px;
             position: relative;
-            font-weight: bold;             /* πιο έντονα γράμματα */
+            font-weight: bold;
             text-shadow:
                 1px 1px 0px rgba(0, 0, 0, 0.8),
                -1px -1px 0px rgba(255, 255, 255, 0.2);
         }
         .question-number {
-            text-decoration: underline;    /* υπογράμμιση για «Ερώτηση X» */
+            text-decoration: underline;
         }
         .emoji {
             display: block;
@@ -108,16 +109,56 @@
         let score = 0;
         let currentQuestion = 0;
         const questions = [
-            { question: 'Ο Κυκλαδικός πολιτισμός ανέπτυξε κεντρική εξουσία.', answer: false },
-            { question: 'Τα νησιά των Κυκλάδων ήταν σημαντικά εμπορικά κέντρα μεταξύ της Ευρώπης και της Ασίας.', answer: true },
-            { question: 'Οι Μυκηναίοι κυριάρχησαν στις Κυκλάδες μετά την κατάρρευση των Μινωιτών.', answer: true },
-            { question: 'Οι Μινωίτες ήταν γεωργικός λαός.', answer: false },
-            { question: 'Ο πολιτισμός των Μινωιτών έφτασε στην ακμή του γύρω στο 1450 π.Χ.', answer: true },
-            { question: 'Οι Μινωίτες είχαν περιορισμένες επαφές με την Αίγυπτο και την Ανατολή.', answer: false },
-            { question: 'Οι Μυκηναίοι επηρεάστηκαν σημαντικά από τον Μινωικό πολιτισμό.', answer: true },
-            { question: 'Η καταστροφή των μινωικών ανακτόρων γύρω στο 1700 π.Χ. δεν είχε σημαντική επίδραση στους Μινωίτες.', answer: false },
-            { question: 'Η Κρήτη ήταν ένας κλειστός πολιτισμός χωρίς επαφές με άλλες περιοχές.', answer: false },
-            // ... υπόλοιπες ερωτήσεις ...
+            { question: 'Οι κυκλαδικοί οικισμοί της 3ης χιλιετίας π.Χ. ανέπτυσσαν κεντρική εξουσία.', answer: false },
+            { question: 'Η αρχική θέση των οικισμών των Κυκλάδων ήταν συνήθως κοντά στη θάλασσα.', answer: true },
+            { question: 'Περίπου το 2300 π.Χ. δεν χτιζόταν πλέον κανένας οχυρωμένος οικισμός στις Κυκλάδες.', answer: false },
+            { question: 'Οι μαρμάρινοι κυκλαδικοί ειδωλοπλαστικοί τύποι απεικονίζουν κυρίως γυμνές γυναίκες.', answer: true },
+            { question: 'Τα πήλινα αγγεία της Κυκλαδικής εποχής είχαν σύνθετη, γεμάτη φλοράλ διακόσμηση.', answer: false },
+            { question: 'Ο σημαντικότερος οικισμός της 2ης χιλιετίας στις Κυκλάδες είναι το Ακρωτήρι στη Θήρα.', answer: true },
+            { question: 'Μετά το σεισμό του 1600 π.Χ. οι Κυκλάδες πέρασαν στη σφαίρα επιρροής της μινωικής Κρήτης.', answer: true },
+            { question: 'Τα κυκλαδικά ειδώλια μπορούσαν να στέκουν όρθια λόγω του ειδικού πάχους τους.', answer: false },
+            { question: 'Τα κυκλαδικά ειδώλια παρουσιάζουν έντονα σχηματοποιημένες μορφές με ελάχιστες λεπτομέρειες.', answer: true },
+            { question: 'Η Κνωσός κατοικήθηκε για πρώτη φορά στη Νεολιθική Εποχή.', answer: true },
+            { question: 'Τα πρώτα μινωικά ανάκτορα αναπτύχθηκαν γύρω στο 2000 π.Χ.', answer: true },
+            { question: 'Τα μινωικά ανάκτορα ήταν οχυρωμένα για να προστατεύουν τους κατοίκους τους.', answer: false },
+            { question: 'Τα μινωικά ανάκτορα είχαν πολυώροφη δομή με φωταγωγούς και αποχετευτικό σύστημα.', answer: true },
+            { question: 'Η μινωική Κρήτη δεν ανέπτυξε ναυτικό στόλο ούτε κατείχε θαλάσσια κυριαρχία.', answer: false },
+            { question: 'Οι τοιχογραφίες των μινωικών ανακτόρων μας δίνουν πληροφορίες για τη θρησκευτική ζωή των Μινωιτών.', answer: true },
+            { question: 'Ο δίσκος της Φαιστού έχει αποκρυπτογραφηθεί πλήρως και περιέχει ύμνο σε θεότητα.', answer: false },
+            { question: 'Το μινωικό εμπόριο περιλάμβανε εξαγωγές κρασιού, λαδιού και υφασμάτων.', answer: true },
+            { question: 'Ο 8ος αιώνας π.Χ. σηματοδοτεί την έναρξη του ελληνικού αποικισμού.', answer: true },
+            { question: 'Ο οικιστής (αποϊκιστής) επιλέγονταν αριστοτεχνικά από την πόλη αποστολής.', answer: true },
+            { question: 'Οι αποικίες ήταν πάντοτε ανεξάρτητες από τη μητρόπολη από την ίδρυσή τους.', answer: false },
+            { question: 'Το σιωπηλό εμπόριο των Καρχηδονίων βασιζόταν σε ανταλλαγή προϊόντων έναντι χρυσού χωρίς επαφή.', answer: true },
+            { question: 'Οι Λυδοί εφηύραν πρώτοι το νόμισμα σε χρυσό και ασήμι.', answer: true },
+            { question: 'Η σχέση μητρόπολης-αποικίας απαγορευόταν να περιλαμβάνει πολιτικό έλεγχο μετά την ίδρυση.', answer: false },
+            { question: 'Οι αρχαϊκές πόλεις-κράτη σχηματίστηκαν από τη σύμπτυξη φυλετικών ομάδων σε συνοικισμούς.', answer: true },
+            { question: 'Ο πολίτης της πόλης-κράτους υπηρετούσε στην οπλιτική φάλαγγα μόνο αν μπορούσε να βρει όπλα.', answer: true },
+            { question: 'Η Συμμαχία της Δήλου ιδρύθηκε το 478 π.Χ. με πρωτοβουλία της Σπάρτης.', answer: false },
+            { question: 'Κάθε μέλος της Συμμαχίας είχε από μία ψήφο στο συνέδριο της Δήλου.', answer: true },
+            { question: 'Οι πόλεις που δεν μπορούσαν να συνεισφέρουν με πλοία πλήρωναν φόρο αντί να στείλουν ναυτικό.', answer: true },
+            { question: 'Ο Αριστείδης οργάνωσε το σύστημα εισφορών με ιδιαίτερα άδικο τρόπο.', answer: false },
+            { question: 'Το 454 π.Χ. ο Περικλής μετέφερε το ταμείο της Συμμαχίας στην Ακρόπολη.', answer: true },
+            { question: 'Η αυτονομία των συμμάχων παρέμεινε ανέπαφη μετά τη μεταφορά του ταμείου.', answer: false },
+            { question: 'Η Ειρήνη του Καλλία (449 π.Χ.) τερμάτισε τους ελληνοπερσικούς πολέμους.', answer: true },
+            { question: 'Μετά την ίδρυση της Αθηναϊκής ηγεμονίας, οι αποφάσεις της Συμμαχίας λαμβάνονταν αποκλειστικά στη Δήλο.', answer: false },
+            { question: 'Η σύγκρουση Αθήνας-Κορινθίων για τον Επίδαμνο αποτέλεσε αφορμή του Πελοποννησιακού.', answer: true },
+            { question: 'Το 431 π.Χ. ξέσπασε ο αρχιδάμειος πόλεμος χωρίς καμία διαπραγμάτευση.', answer: true },
+            { question: 'Οι Μεγαρείς είχαν το δικαίωμα αγκυροβόλησης σε όλα τα λιμάνια της Αθηναϊκής Συμμαχίας.', answer: false },
+            { question: 'Ο λοιμός που ξέσπασε στην Αθήνα το 430 π.Χ. αποδεκάτισε και τον ίδιο τον Περικλή.', answer: true },
+            { question: 'Η κατάληψη της Σφακτηρίας οδήγησε άμεσα σε ειρήνη μεταξύ Αθήνας και Σπάρτης.', answer: false },
+            { question: 'Ο πόλεμος διήρκεσε συνολικά περίπου 27 χρόνια με τρεις κύριες φάσεις.', answer: true },
+            { question: 'Η Λέσβος ηγήθηκε εξεγέρσεων κατά των Αθηναίων πριν από την κατάληψη της Σφακτηρίας.', answer: true },
+            { question: 'Ο θάνατος των Βρασίδα και Κλέωνα οδήγησε στη σύναψη της Ειρήνης των Νικείων.', answer: true },
+            { question: 'Η πρωτεύουσα των Μακεδόνων ήταν πάντοτε οι Αιγές.', answer: false },
+            { question: 'Ο Αλέξανδρος Αʹ συμμετείχε στους Ολυμπιακούς Αγώνες και συνέβαλε στην αναδιοργάνωση του κράτους.', answer: true },
+            { question: 'Ο Αρχέλαος μετέφερε την πρωτεύουσα από τις Αιγές στην Πέλλα.', answer: true },
+            { question: 'Το Δίο εξελίχθηκε σε θρησκευτικό κέντρο των Μακεδόνων, αντίστοιχο της Ολυμπίας.', answer: true },
+            { question: 'Ο Φίλιππος Βʹ εισήγαγε τη σάρισσα και αναδιοργάνωσε τη μακεδονική φάλαγγα.', answer: true },
+            { question: 'Ο μακεδονικός στρατός βασιζόταν κυρίως στο βαρέως εξοπλισμένο πεζικό.', answer: false },
+            { question: 'Ο Φίλιππος Βʹ κατέκτησε τη Χαιρώνεια το 338 π.Χ., εξασφαλίζοντας την ελληνική υποταγή.', answer: true },
+            { question: 'Ο Αλέξανδρος ο Μεγάλος πραγματοποίησε εκστρατεία εναντίον της Περσικής Αυτοκρατορίας.', answer: true },
+            { question: 'Ο πρόωρος θάνατός του το 323 π.Χ. εμπόδισε την ολοκλήρωση της περσικής εκστρατείας του.', answer: true }
         ];
         const ancientEmojis = ['🏺', '🏛️', '⚔️', '🛡️', '📜'];
         const container = document.querySelector('.question-container');
@@ -136,12 +177,12 @@
             const btnTrue = document.createElement('button');
             btnTrue.classList.add('true');
             btnTrue.textContent = 'Σωστό';
-            btnTrue.onclick = () => checkAnswer(true);
+            btnTrue.onclick = () => checkAnswer(true, index);
 
             const btnFalse = document.createElement('button');
             btnFalse.classList.add('false');
             btnFalse.textContent = 'Λάθος';
-            btnFalse.onclick = () => checkAnswer(false);
+            btnFalse.onclick = () => checkAnswer(false, index);
 
             qDiv.prepend(emojiDiv);
             container.appendChild(qDiv);
@@ -151,17 +192,25 @@
             qDiv.appendChild(btnFalse);
         }
 
-        function checkAnswer(isCorrect) {
-            const correct = questions[currentQuestion].answer;
+        function checkAnswer(isCorrect, questionIndex) {
+            const correct = questions[questionIndex].answer;
             const audio = isCorrect === correct ? document.getElementById('successAudio') : document.getElementById('failAudio');
             audio.play();
             const qDiv = container.querySelector('.question');
             qDiv.style.backgroundColor = isCorrect === correct ? 'green' : 'red';
             if (isCorrect === correct) score++;
             document.getElementById('score').textContent = score;
+            
+            const buttons = qDiv.querySelectorAll('button');
+            buttons.forEach(btn => { btn.disabled = true; });
+            
             setTimeout(() => {
                 currentQuestion++;
-                if (currentQuestion < questions.length) showQuestion(currentQuestion);
+                if (currentQuestion < questions.length) {
+                    showQuestion(currentQuestion);
+                } else {
+                    container.innerHTML = `<div class="question">Τέλος του κουίζ!<br>Το τελικό σου σκορ: ${score}/${questions.length}</div>`;
+                }
             }, 1000);
         }
 
